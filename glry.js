@@ -1,3 +1,8 @@
+/*!
+ * glry v0.1.0 (https://github.com/omichelsen/glry)
+ * Copyright 2014 Ole Michelsen <ole@michelsen.dk>
+ * Licensed under MIT
+ */
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         define([], factory);
