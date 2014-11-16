@@ -1,0 +1,32 @@
+{
+  "name": "glry",
+  "version": "0.1.0",
+  "description": "Image gallery with mobile/touch support and no dependencies.",
+  "main": "glry.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">= 0.10"
+  },
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/omichelsen/glry.git"
+  },
+  "keywords": [
+    "gallery",
+    "image",
+    "photo",
+    "mobile",
+    "touch",
+    "javascript"
+  ],
+  "author": "Ole Michelsen <ole@michelsen.dk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/omichelsen/glry/issues"
+  },
+  "homepage": "https://github.com/omichelsen/glry"
+}

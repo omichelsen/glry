@@ -1,0 +1,17 @@
+{
+    "name": "glry",
+    "version": "0.1.0",
+    "main": "glry.js",
+    "description": "Image gallery with mobile/touch support and no dependencies.",
+    "dependencies": {},
+    "ignore": [
+        ".gitignore",
+        "bower.json",
+        "package.json",
+        "gulpfile.js",
+        "README.md",
+        "license.md",
+        "demo",
+        "test"
+    ]
+}
