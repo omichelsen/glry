@@ -1,8 +1,10 @@
 # glry
 
-Image gallery with mobile/touch support and no dependencies. This gallery does not require you to specify all the images in the markup beforehand, instead you supply a `load` function which returns the next/prev image. This makes it ideal for large or dynamic galleries, where the next image should be loaded based on changing logic.
+Image gallery with mobile/touch support and no dependencies. 
 
-This library is also used as a base for [daily-glry](https://github.com/omichelsen/daily-glry.git), which is an extension specifically designed for daily comic strips.
+Does not require you to specify all the images in the markup beforehand, instead you supply a `load` function which returns the next/prev image. This makes it ideal for large or dynamic galleries, where the images should be loaded based on changing logic.
+
+glry is also used as a base for [daily-glry](https://github.com/omichelsen/daily-glry.git), which is an extension specifically designed for daily comic strips.
 
 ## Install
 
@@ -16,32 +18,36 @@ Include the library in your web page:
 <script src="bower_components/glry/glry.js"></script>
 ```
 
-glry has no other dependencies.
-
 ## Usage
 
 Initialize the gallery with a minimal set of options like this:
 
-    var glry = new Glry({
-            load: function (direction) {
-                if (direction === 'left')
-                    return 'prev-image.jpg';
-                else
-                    return 'next-image.jpg';
-            }
-        });
+```js
+var glry = new Glry({
+        load: function (direction) {
+            if (direction === 'left')
+                return 'prev-image.jpg';
+            else
+                return 'next-image.jpg';
+        }
+    });
+```
 
-The only required option is `load` which should be a function that returns the URL of the next/prev image. The function is passed a `direction` string parameter indicating whether the navigation direction is `left` or `right`.
+The only required option is `load` which should be a function that returns the URL of the next/prev image. The function is passed a `direction` string parameter indicating whether the navigation direction is "left" or "right".
+
+### Options
 
 The available options and their defaults are as follows:
 
-    {
-        target: '#figure',
-        animationSpeed: 250,
-        enableKeyboard: true,
-        onLoadStart: false,
-        onLoadEnd: false
-    }
+```json
+{
+    target: '#figure',
+    animationSpeed: 250,
+    enableKeyboard: true,
+    onLoadStart: false,
+    onLoadEnd: false
+}
+```
 
 If you want to do some work before or after an image has loaded, you can pass a function to `onLoadStart`/`onLoadEnd`.
 
