@@ -39,7 +39,7 @@ The only required option is `load` which should be a function that returns the U
 
 The available options and their defaults are as follows:
 
-```json
+```js
 {
     target: '#figure',
     animationSpeed: 250,
