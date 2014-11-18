@@ -1,5 +1,5 @@
 /*!
- * glry v0.1.0 (https://github.com/omichelsen/glry)
+ * glry v0.2.0 (https://github.com/omichelsen/glry)
  * Copyright 2014 Ole Michelsen <ole@michelsen.dk>
  * Licensed under MIT
  */
@@ -56,6 +56,8 @@
             inProgress = false;
 
         window.addEventListener('resize', setImage);
+        window.addEventListener('touchstart', handleScrolling);
+        window.addEventListener('touchmove', handleScrolling);
 
         if (elmNavigation) {
             window.addEventListener('mousemove', handleNavigation());
@@ -194,6 +196,10 @@
             if (e.keyCode === 37 || e.keyCode === 39) {
                 loadImage(e.keyCode === 37 ? 'left' : 'right');
             }
+        }
+
+        function handleScrolling(e) {
+            e.preventDefault();
         }
 
         return {
