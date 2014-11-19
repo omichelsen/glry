@@ -1,5 +1,5 @@
 /*!
- * glry v0.2.0 (https://github.com/omichelsen/glry)
+ * glry v0.3.0 (https://github.com/omichelsen/glry)
  * Copyright 2014 Ole Michelsen <ole@michelsen.dk>
  * Licensed under MIT
  */
@@ -11,6 +11,14 @@
     }
 }(this, function () {
     'use strict';
+
+    function extend(target, source) {
+        if (typeof source !== 'object') return target;
+        for (var prop in source) {
+            target[prop] = source[prop];
+        }
+        return target;
+    }
 
     function cssPrefix() {
         var s = (document.body || document.documentElement).style;
@@ -26,13 +34,47 @@
         extend(element.style, options);
     }
 
-    function extend(target, source) {
-        if (typeof source !== 'object') return target;
-        for (var prop in source) {
-            target[prop] = source[prop];
-        }
-        return target;
+    function GlryTap(elm) {
+        elm.addEventListener('touchstart', this);
+        elm.addEventListener('touchmove', this);
+        elm.addEventListener('touchend', this);
+        elm.addEventListener('touchcancel', this);
+        elm.addEventListener('mousedown', this);
+        elm.addEventListener('mouseup', this);
     }
+
+    GlryTap.prototype.start = function(e) {
+        this.moved = false;
+        this.startX = e.clientX || e.touches[0].clientX;
+        this.startY = e.clientY || e.touches[0].clientY;
+    };
+
+    GlryTap.prototype.move = function(e) {
+        if (Math.abs(e.touches[0].clientX - this.startX) > 10 || Math.abs(e.touches[0].clientY - this.startY) > 10) {
+            this.moved = true;
+        }
+    };
+
+    GlryTap.prototype.end = function(e) {
+        var tap = new CustomEvent('tap', { bubbles: true, cancelable: true });
+        if (!this.moved) {
+            e.stopPropagation();
+            if (!e.target.dispatchEvent(tap)) {
+                e.preventDefault();
+            }
+        }
+    };
+
+    GlryTap.prototype.handleEvent = function (e) {
+        switch (e.type) {
+            case 'touchstart':  this.start(e);  break;
+            case 'touchmove':   this.move(e);   break;
+            case 'touchend':    this.end(e);    break;
+            case 'touchcancel': this.end(e);    break;
+            case 'mousedown':   this.start(e);  break;
+            case 'mouseup':     this.end(e);    break;
+        }
+    };
 
     function Glry(options) {
         var options = extend({
@@ -53,21 +95,22 @@
             imageWidth = 0,
             imageHeight = 0,
             swipeDiff = 0,
-            inProgress = false;
+            inProgress = false,
+            timer;
 
         window.addEventListener('resize', setImage);
-        window.addEventListener('touchstart', handleScrolling);
-        window.addEventListener('touchmove', handleScrolling);
+        window.addEventListener('touchmove', preventScrolling);
 
         if (elmNavigation) {
-            window.addEventListener('mousemove', handleNavigation());
+            var glryTap = new GlryTap(window);
+            window.addEventListener('tap', handleNavigationToggle);
+            elmNavigation.querySelector('.prev').addEventListener('tap', handleNavigationClick.bind(this, 'left'));
+            elmNavigation.querySelector('.next').addEventListener('tap', handleNavigationClick.bind(this, 'right'));
         }
 
         if (options.enableKeyboard) {
             window.addEventListener('keyup', handleKeyboard);
         }
-
-        loadImage();
 
         function setImage() {
             if (!image) return true;
@@ -129,7 +172,7 @@
                     cssTranslateX(image, -100 * direction + 'px', 0);
                     setTimeout(function () {
                         image.style.opacity = 1;
-                        cssTranslateX(image, 0 + 'px', options.animationSpeed / 1000)
+                        cssTranslateX(image, 0 + 'px', options.animationSpeed / 1000);
                     }, 50);
 
                     setTimeout(function () {
@@ -150,12 +193,12 @@
                     imagePosLeft = 0;
 
                 image.addEventListener('touchstart', function (e) {
+                    e.preventDefault();
                     imagePosLeft = parseInt(image.style.left);
                     swipeStart = e.pageX || e.touches[0].pageX;
                 });
 
                 image.addEventListener('touchmove', function (e) {
-                    e.preventDefault();
                     swipeEnd = e.pageX || e.touches[0].pageX;
                     swipeDiff = swipeStart - swipeEnd;
                     cssTranslateX(image, -swipeDiff + 'px', 0);
@@ -178,19 +221,6 @@
             image = null;
         }
 
-        function handleNavigation() {
-            var timeout;
-            return function (e) {
-                clearTimeout(timeout);
-                elmNavigation.style.opacity = 1;
-                if (e.target != elmNavigation) {
-                    timeout = setTimeout(function () {
-                        elmNavigation.style.opacity = 0;
-                    }, 1500);
-                }
-            };
-        }
-
         function handleKeyboard(e) {
             e.preventDefault();
             if (e.keyCode === 37 || e.keyCode === 39) {
@@ -198,9 +228,28 @@
             }
         }
 
-        function handleScrolling(e) {
+        function preventScrolling(e) {
             e.preventDefault();
         }
+
+        function handleNavigationToggle(e) {
+            clearTimeout(timer);
+            if (Number(elmNavigation.style.opacity)) {
+                elmNavigation.style.opacity = 0;
+                return;
+            }
+            elmNavigation.style.opacity = 1;
+            timer = setTimeout(function () {
+                elmNavigation.style.opacity = 0;
+            }, 2500);
+        }
+
+        function handleNavigationClick(direction, e) {
+            e.stopPropagation();
+            loadImage(direction);
+        }
+
+        loadImage();
 
         return {
             loadImage: loadImage
