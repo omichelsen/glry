@@ -1,5 +1,5 @@
 /*!
- * glry v0.3.0 (https://github.com/omichelsen/glry)
+ * glry v0.3.1 (https://github.com/omichelsen/glry)
  * Copyright 2014 Ole Michelsen <ole@michelsen.dk>
  * Licensed under MIT
  */
@@ -255,6 +255,8 @@
             loadImage: loadImage
         };
     };
+
+    Glry.prototype.extend = extend;
 
     return Glry;
 
