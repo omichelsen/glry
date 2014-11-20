@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=740, user-scalable=no" />
+    <title>glry demo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="demo.css" rel="stylesheet">
+</head>
+<body>
+
+    <figure id="figure">
+        <div class="loading">LOADING</div>
+        <div class="error">ERROR</div>
+
+        <nav class="navigation">
+            <button class="prev">◀</button>
+            <button class="next">▶</button>
+        </nav>
+    </figure>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="https://rawgit.com/alexgibson/shake.js/master/shake.js"></script>
+    <script src="../glry.js"></script>
+    <script>
+        var index = -1;
+
+        var images = [
+            'http://imgs.xkcd.com/comics/timeghost.png',
+            'http://imgs.xkcd.com/comics/lease.png',
+            'http://imgs.xkcd.com/comics/exploits_of_a_mom.png'
+        ];
+
+        var glry = new Glry({
+            load: function (direction) {
+                index = (index + (direction === 'left' ? -1 : 1)) % images.length;
+                if (index < 0) index = images.length - 1;
+                return images[index];
+            }
+        });
+    </script>
+</body>
+</html>
