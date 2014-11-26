@@ -95,8 +95,7 @@
             imageWidth = 0,
             imageHeight = 0,
             swipeDiff = 0,
-            inProgress = false,
-            timer;
+            inProgress = false;
 
         window.addEventListener('resize', setImage);
         window.addEventListener('touchmove', preventScrolling);
@@ -233,15 +232,7 @@
         }
 
         function handleNavigationToggle(e) {
-            clearTimeout(timer);
-            if (Number(elmNavigation.style.opacity)) {
-                elmNavigation.style.opacity = 0;
-                return;
-            }
-            elmNavigation.style.opacity = 1;
-            timer = setTimeout(function () {
-                elmNavigation.style.opacity = 0;
-            }, 2500);
+            elmNavigation.style.opacity = Number(elmNavigation.style.opacity) ? 0 : 1;
         }
 
         function handleNavigationClick(direction, e) {
