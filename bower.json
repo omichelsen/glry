@@ -1,6 +1,6 @@
 {
     "name": "glry",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "main": "glry.js",
     "description": "Image gallery with mobile/touch support and no dependencies.",
     "dependencies": {},

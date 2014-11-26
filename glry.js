@@ -1,5 +1,5 @@
 /*!
- * glry v0.3.1 (https://github.com/omichelsen/glry)
+ * glry v0.3.2 (https://github.com/omichelsen/glry)
  * Copyright 2014 Ole Michelsen <ole@michelsen.dk>
  * Licensed under MIT
  */
