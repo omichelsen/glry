@@ -1,5 +1,5 @@
 /*!
- * glry v0.3.2 (https://github.com/omichelsen/glry)
+ * glry v0.3.3 (https://github.com/omichelsen/glry)
  * Copyright 2014 Ole Michelsen <ole@michelsen.dk>
  * Licensed under MIT
  */
@@ -232,6 +232,7 @@
         }
 
         function handleNavigationToggle(e) {
+            e.preventDefault();
             elmNavigation.style.opacity = Number(elmNavigation.style.opacity) ? 0 : 1;
         }
 
