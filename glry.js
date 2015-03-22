@@ -4,6 +4,7 @@
  * Licensed under MIT
  */
 (function (root, factory) {
+    /* istanbul ignore next */
     if (typeof define === 'function' && define.amd) {
         define([], factory);
     } else {
