@@ -1,5 +1,8 @@
 # glry
 
+[![Build Status][travis-image]][travis-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
+
 Image gallery with mobile/touch support and no dependencies.
 
 __[See the demo](http://rawgit.com/omichelsen/glry/master/demo/index.html)__
@@ -67,3 +70,8 @@ The available options and their defaults are as follows:
 If you want to do some work before or after an image has loaded, you can pass a function to `onLoadStart`/`onLoadEnd`.
 
 Keyboard navigation is enabled per default, and maps to the <kbd>◀</kbd> / <kbd>▶</kbd> arrow keys to go to next/previous image.
+
+[travis-image]: https://img.shields.io/travis/omichelsen/glry/master.svg
+[travis-url]: https://travis-ci.org/omichelsen/glry
+[coveralls-image]: https://img.shields.io/coveralls/omichelsen/glry/master.svg
+[coveralls-url]: https://coveralls.io/r/omichelsen/glry?branch=master
