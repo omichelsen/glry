@@ -8,8 +8,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'glry.js',
-      'test/*.js'
+        {pattern: 'test/*.jpg', watched: false, included: false, served: true},
+        'glry.js',
+        'test/*.js'
     ],
 
     // list of files to exclude

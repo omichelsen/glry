@@ -28,17 +28,10 @@ describe('glry', function () {
 
         options = {
             animationSpeed: 0,
-            load: function (direction) {
-                if (direction === 'left')
-                    return 'prev-image.jpg';
-                else
-                    return 'next-image.jpg';
+            load: function (directions) {
+                return 'base/test/test1.jpg';
             }
         };
-    });
-
-    beforeEach(function () {
-        spyOn(options, 'load').and.callThrough();
     });
 
     afterAll(function () {
@@ -46,12 +39,18 @@ describe('glry', function () {
         elm = null;
     });
 
-    it('should load image on init', function () {
+    it('should load image on init', function (done) {
+        spyOn(options, 'load').and.callThrough();
+        options.onLoadEnd = function () {
+            expect(options.load.calls.count()).toEqual(1);
+            expect(options.load).toHaveBeenCalledWith(undefined);
+            done();
+        };
         glry = new Glry(options);
-        expect(options.load).toHaveBeenCalledWith(undefined);
     });
 
     it('should show error', function (done) {
+        spyOn(options, 'load').and.returnValue('invalid.jpg');
         options.onLoadEnd = function () {
             expect(elm.querySelector('.error').style.display).toEqual('block');
             done();
@@ -60,9 +59,9 @@ describe('glry', function () {
     });
 
     it('should load next', function (done) {
+        spyOn(options, 'load').and.callThrough();
         options.onLoadEnd = function () {
-            var next = elm.querySelector('.next');
-            next.dispatchEvent(createEvent('mouseup'));
+            elm.querySelector('.next').dispatchEvent(createEvent('mouseup'));
             expect(options.load.calls.count()).toEqual(2);
             expect(options.load).toHaveBeenCalledWith('right');
             done();
