@@ -1,6 +1,6 @@
 /*!
- * glry v0.3.3 (https://github.com/omichelsen/glry)
- * Copyright 2014 Ole Michelsen <ole@michelsen.dk>
+ * glry v0.3.4 (https://github.com/omichelsen/glry)
+ * Copyright 2014-2016 Ole Michelsen <ole@michelsen.dk>
  * Licensed under MIT
  */
 (function (root, factory) {
@@ -223,8 +223,12 @@
 
         function handleKeyboard(e) {
             e.preventDefault();
-            if (e.keyCode === 37 || e.keyCode === 39) {
-                loadImage(e.keyCode === 37 ? 'left' : 'right');
+            var left = [37, 65, 97];
+            var right = [39, 68, 100];
+            if (left.indexOf(e.keyCode) > -1) {
+                loadImage('left');
+            } else if (right.indexOf(e.keyCode) > -1) {
+                loadImage('right');
             }
         }
 
