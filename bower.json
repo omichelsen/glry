@@ -5,13 +5,14 @@
     "description": "Image gallery with mobile/touch support and no dependencies.",
     "dependencies": {},
     "ignore": [
-        ".gitignore",
-        "bower.json",
-        "package.json",
-        "gulpfile.js",
-        "README.md",
-        "license.md",
         "demo",
-        "test"
+        "test",
+        ".gitignore",
+        ".travis.yml",
+        "bower.json",
+        "karma.conf.json",
+        "LICENSE",
+        "package.json",
+        "README.md"
     ]
 }
