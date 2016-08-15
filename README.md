@@ -13,6 +13,14 @@ glry is also used as a base for [daily-glry](https://github.com/omichelsen/daily
 
 ## Install
 
+With npm:
+
+```bash
+$ npm install glry --save
+```
+
+or bower:
+
 ```bash
 $ bower install glry --save
 ```
