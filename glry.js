@@ -1,8 +1,3 @@
-/*!
- * glry v0.3.4 (https://github.com/omichelsen/glry)
- * Copyright 2014-2016 Ole Michelsen <ole@michelsen.dk>
- * Licensed under MIT
- */
 (function (root, factory) {
     /* istanbul ignore next */
     if (typeof define === 'function' && define.amd) {
