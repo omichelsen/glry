@@ -104,7 +104,7 @@
         }
 
         if (options.enableKeyboard) {
-            window.addEventListener('keypress', handleKeyboard);
+            window.addEventListener('keydown', handleKeyboard);
         }
 
         function setImage() {
