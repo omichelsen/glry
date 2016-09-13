@@ -73,7 +73,7 @@
     };
 
     function Glry(options) {
-        var options = extend({
+        var settings = extend({
                     target: '#figure',
                     animationSpeed: 250,
                     enableKeyboard: true,
@@ -83,7 +83,7 @@
                 },
                 options),
 
-            elmContainer = typeof options.target === 'object' ? options.target : document.querySelector(options.target),
+            elmContainer = typeof settings.target === 'object' ? settings.target : document.querySelector(settings.target),
             elmNavigation = elmContainer.querySelector('.navigation'),
             elmLoading = elmContainer.querySelector('.loading'),
             elmError = elmContainer.querySelector('.error'),
@@ -105,7 +105,7 @@
             elmNavigation.querySelector('.next').addEventListener('tap', handleNavigationClick.bind(this, 'right'));
         }
 
-        if (options.enableKeyboard) {
+        if (settings.enableKeyboard) {
             window.addEventListener('keydown', handleKeyboard);
         }
 
@@ -147,21 +147,21 @@
         function loadImage(direction) {
             if (inProgress) return false;
 
-            var src = options.load(direction);
+            var src = settings.load(direction);
             if (!src) return false;
 
             direction = direction === 'left' ? 1 : direction === 'right' ? -1 : 0;
 
             if (image) {
                 image.style.opacity = 0;
-                cssTranslateX(image, (100 * direction) - swipeDiff + 'px', options.animationSpeed / 1000);
-                setTimeout(removeImage, options.animationSpeed);
+                cssTranslateX(image, (100 * direction) - swipeDiff + 'px', settings.animationSpeed / 1000);
+                setTimeout(removeImage, settings.animationSpeed);
                 swipeDiff = 0;
             }
 
             inProgress = true;
             toggleVisible(elmLoading);
-            if (options.onLoadStart !== false) options.onLoadStart();
+            if (settings.onLoadStart !== false) settings.onLoadStart();
 
             setTimeout(function () {
                 image = document.createElement('img');
@@ -174,28 +174,26 @@
                     cssTranslateX(image, -100 * direction + 'px', 0);
                     setTimeout(function () {
                         image.style.opacity = 1;
-                        cssTranslateX(image, 0 + 'px', options.animationSpeed / 1000);
+                        cssTranslateX(image, 0 + 'px', settings.animationSpeed / 1000);
                     }, 50);
 
                     setTimeout(function () {
                         inProgress = false;
                         toggleVisible();
-                        if (options.onLoadEnd !== false) options.onLoadEnd();
-                    }, options.animationSpeed);
+                        if (settings.onLoadEnd !== false) settings.onLoadEnd();
+                    }, settings.animationSpeed);
                 };
-                image.onerror = function (e) {
+                image.onerror = function () {
                     inProgress = false;
                     toggleVisible(elmError);
-                    if (options.onLoadEnd !== false) options.onLoadEnd();
+                    if (settings.onLoadEnd !== false) settings.onLoadEnd();
                 };
 
                 var swipeStart = 0,
-                    swipeEnd = 0,
-                    imagePosLeft = 0;
+                    swipeEnd = 0;
 
                 image.addEventListener('touchstart', function (e) {
                     e.preventDefault();
-                    imagePosLeft = parseInt(image.style.left);
                     swipeStart = e.pageX || e.touches[0].pageX;
                 });
 
@@ -205,15 +203,15 @@
                     cssTranslateX(image, -swipeDiff + 'px', 0);
                 });
 
-                image.addEventListener('touchend', function (e) {
+                image.addEventListener('touchend', function () {
                     if (Math.abs(swipeDiff) > 50) {
                         loadImage(swipeDiff > 0 ? 'right' : 'left');
                     } else {
-                        cssTranslateX(image, 0 + 'px', options.animationSpeed / 1000);
+                        cssTranslateX(image, 0 + 'px', settings.animationSpeed / 1000);
                     }
                 });
 
-            }, options.animationSpeed + 100);
+            }, settings.animationSpeed + 100);
         }
 
         function removeImage() {
@@ -252,7 +250,7 @@
         return {
             loadImage: loadImage
         };
-    };
+    }
 
     Glry.prototype.extend = extend;
 

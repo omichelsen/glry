@@ -28,7 +28,7 @@ describe('glry', function () {
 
         options = {
             animationSpeed: 0,
-            load: function (directions) {
+            load: function () {
                 return 'base/test/test1.jpg';
             }
         };
