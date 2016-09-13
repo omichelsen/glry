@@ -96,6 +96,9 @@
         window.addEventListener('resize', setImage);
         window.addEventListener('touchmove', preventScrolling);
 
+        elmLoading.classList.add('hidden');
+        elmError.classList.add('hidden');
+
         if (elmNavigation) {
             var glryTap = new GlryTap(window);
             window.addEventListener('tap', handleNavigationToggle);
