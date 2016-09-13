@@ -76,10 +76,14 @@ figure img {
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  display: none;
   color: #555;
   font-size: 2em;
   font-weight: bold;
+  text-transform: uppercase;
+  transition: all 1s;
+}
+.hidden {
+  opacity: 0;
 }
 @media screen and (orientation: portrait) {
   body {
