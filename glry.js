@@ -30,6 +30,15 @@
         extend(element.style, options);
     }
 
+    function cssCenter(element, width, height) {
+        extend(element.style, {
+            'width': width + 'px',
+            'height': height + 'px',
+            'top': (window.innerHeight - height) / 2 + 'px',
+            'left': (window.innerWidth - width) / 2 + 'px'
+        });
+    }
+
     function GlryTap(elm) {
         elm.addEventListener('touchstart', this);
         elm.addEventListener('touchmove', this);
@@ -135,12 +144,7 @@
                     imageHeight /= ratio;
                 }
 
-                extend(image.style, {
-                    'width': imageWidth + 'px',
-                    'height': imageHeight + 'px',
-                    'top': (window.innerHeight - imageHeight) / 2 + 'px',
-                    'left': (window.innerWidth - imageWidth) / 2 + 'px'
-                });
+                cssCenter(image, imageWidth, imageHeight);
             };
         }
 
