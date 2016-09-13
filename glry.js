@@ -96,8 +96,7 @@
         window.addEventListener('resize', setImage);
         window.addEventListener('touchmove', preventScrolling);
 
-        elmLoading.classList.add('hidden');
-        elmError.classList.add('hidden');
+        toggleVisible();
 
         if (elmNavigation) {
             var glryTap = new GlryTap(window);
@@ -108,6 +107,12 @@
 
         if (options.enableKeyboard) {
             window.addEventListener('keydown', handleKeyboard);
+        }
+
+        function toggleVisible(elmVisible) {
+            [elmLoading, elmError].forEach(function (elm) {
+                elm.classList.toggle('hidden', elm !== elmVisible);
+            });
         }
 
         function setImage() {
@@ -155,8 +160,7 @@
             }
 
             inProgress = true;
-            elmLoading.classList.remove('hidden');
-            elmError.classList.add('hidden');
+            toggleVisible(elmLoading);
             if (options.onLoadStart !== false) options.onLoadStart();
 
             setTimeout(function () {
@@ -175,14 +179,13 @@
 
                     setTimeout(function () {
                         inProgress = false;
-                        elmLoading.classList.add('hidden');
+                        toggleVisible();
                         if (options.onLoadEnd !== false) options.onLoadEnd();
                     }, options.animationSpeed);
                 };
                 image.onerror = function (e) {
                     inProgress = false;
-                    elmLoading.classList.add('hidden');
-                    elmError.classList.remove('hidden');
+                    toggleVisible(elmError);
                     if (options.onLoadEnd !== false) options.onLoadEnd();
                 };
 
