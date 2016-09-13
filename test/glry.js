@@ -52,7 +52,7 @@ describe('glry', function () {
     it('should show error', function (done) {
         spyOn(options, 'load').and.returnValue('invalid.jpg');
         options.onLoadEnd = function () {
-            expect(elm.querySelector('.error').style.display).toEqual('block');
+            expect(elm.querySelector('.error').classList.contains('hidden')).toBeFalsy();
             done();
         };
         glry = new Glry(options);
