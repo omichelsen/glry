@@ -225,7 +225,6 @@
         }
 
         function handleKeyboard(e) {
-            e.preventDefault();
             var left = [37, 65, 97];
             var right = [39, 68, 100];
             if (left.indexOf(e.keyCode) > -1) {
