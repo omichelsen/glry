@@ -55,11 +55,16 @@ var glry = new Glry({
             return 'prev-image.jpg';
         else
             return 'next-image.jpg';
+    },
+    canNavigate: function (direction) {
+        return true;
     }
 });
 ```
 
 The only required option is `load` which should be a function that returns the URL of the next/previous image. The function is passed a `direction` parameter indicating whether the navigation direction is "left" or "right".
+
+You can optionally specify a `canNavigate` function, to prevent swiping in a given direction. This can be useful if you don't have an infinite amount of images and want to signal that the user has reached the end (or beginning).
 
 ### Options
 

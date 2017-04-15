@@ -88,7 +88,8 @@
                     enableKeyboard: true,
                     onLoadStart: false,
                     onLoadEnd: false,
-                    load: function () {}
+                    load: function () {},
+                    canNavigate: function () { return true },
                 },
                 options),
 
@@ -194,7 +195,8 @@
                 };
 
                 var swipeStart = 0,
-                    swipeEnd = 0;
+                    swipeEnd = 0,
+                    swipeDirection = 0;
 
                 image.addEventListener('touchstart', function (e) {
                     e.preventDefault();
@@ -204,14 +206,17 @@
                 image.addEventListener('touchmove', function (e) {
                     swipeEnd = e.pageX || e.touches[0].pageX;
                     swipeDiff = swipeStart - swipeEnd;
-                    cssTranslateX(image, -swipeDiff + 'px', 0);
+                    swipeDirection = swipeDiff > 0 ? 'right' : 'left';
+                    if (settings.canNavigate(swipeDirection)) {
+                        cssTranslateX(image, -swipeDiff + 'px', 0);
+                    }
                 });
 
                 image.addEventListener('touchend', function () {
-                    if (Math.abs(swipeDiff) > 50) {
-                        loadImage(swipeDiff > 0 ? 'right' : 'left');
+                    if (Math.abs(swipeDiff) > 50 && settings.canNavigate(swipeDirection)) {
+                        loadImage(swipeDirection);
                     } else {
-                        cssTranslateX(image, 0 + 'px', settings.animationSpeed / 1000);
+                        cssTranslateX(image, '0px', settings.animationSpeed / 1000);
                     }
                 });
 
