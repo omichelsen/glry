@@ -13,22 +13,8 @@ glry is also used as a base for [daily-glry](https://github.com/omichelsen/daily
 
 ## Install
 
-With npm:
-
 ```bash
 $ npm install glry --save
-```
-
-or bower:
-
-```bash
-$ bower install glry --save
-```
-
-Include the library in your web page:
-
-```html
-<script src="bower_components/glry/glry.js"></script>
 ```
 
 ## Usage
@@ -49,16 +35,17 @@ Place some basic HTML on your page:
 Initialize the gallery with a minimal set of options like this:
 
 ```js
-var glry = new Glry({
-    load: function (direction) {
-        if (direction === 'left')
+import Glry from 'glry';
+
+const glry = new Glry({
+    load: (direction) => {
+        if (direction === 'left') {
             return 'prev-image.jpg';
-        else
+        } else {
             return 'next-image.jpg';
+        }
     },
-    canNavigate: function (direction) {
-        return true;
-    }
+    canNavigate: (direction) => true,
 });
 ```
 
