@@ -1,5 +1,15 @@
+const expect = require('chai').expect;
+const jsdom = require('mocha-jsdom');
+const sandbox = require('sinon').createSandbox();
+
+const { Glry } = require('../glry');
+
 describe('glry', function () {
-    var elm, nav, glry, options;
+    jsdom({
+        url: 'http://localhost/',
+    })
+    
+    let elm, nav, glry, options;
 
     function createElement(tag, props, child) {
         var elm = document.createElement(tag);
@@ -16,7 +26,7 @@ describe('glry', function () {
         return e;
     }
 
-    beforeAll(function () {
+    before(function () {
         elm = createElement('figure', {'id': 'figure'});
         elm.appendChild(createElement('div', {'class': 'loading'}));
         elm.appendChild(createElement('div', {'class': 'error'}));
@@ -28,42 +38,44 @@ describe('glry', function () {
 
         options = {
             animationSpeed: 0,
-            load: function () {
-                return 'base/test/test1.jpg';
-            }
+            load: () => 'base/test/test1.jpg',
         };
     });
 
-    afterAll(function () {
+    afterEach(function () {
+        sandbox.restore();
+    });
+
+    after(function () {
         elm.parentNode.removeChild(elm);
         elm = null;
     });
 
     it('should load image on init', function (done) {
-        spyOn(options, 'load').and.callThrough();
+        sandbox.spy(options, 'load');
         options.onLoadEnd = function () {
-            expect(options.load.calls.count()).toEqual(1);
-            expect(options.load).toHaveBeenCalledWith(undefined);
+            expect(options.load.calls.count()).to.eql(1);
+            expect(options.load).to.have.been.calledWith(undefined);
             done();
         };
         glry = new Glry(options);
     });
 
     it('should show error', function (done) {
-        spyOn(options, 'load').and.returnValue('invalid.jpg');
+        sandbox.stub(options, 'load').returns('invalid.jpg');
         options.onLoadEnd = function () {
-            expect(elm.querySelector('.error').classList.contains('hidden')).toBeFalsy();
+            expect(elm.querySelector('.error').classList.contains('hidden')).to.be.false    ;
             done();
         };
         glry = new Glry(options);
     });
 
     it('should load next', function (done) {
-        spyOn(options, 'load').and.callThrough();
+        sandbox.spy(options, 'load');
         options.onLoadEnd = function () {
             elm.querySelector('.next').dispatchEvent(createEvent('mouseup'));
-            expect(options.load.calls.count()).toEqual(2);
-            expect(options.load).toHaveBeenCalledWith('right');
+            expect(options.load.calls.count()).to.eql(2);
+            expect(options.load).to.have.been.calledWith('right');
             done();
         };
         glry = new Glry(options);
