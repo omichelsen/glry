@@ -1,10 +1,8 @@
 language: node_js
 node_js:
-  - "10"
+  - node
 addons:
-  firefox:
-    "latest"
-before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-after_script: "npm install coveralls@2.11.8 && cat ./coverage/**/lcov.info | coveralls"
+  firefox: latest
+services:
+  - xvfb
+after_script: "npx coveralls && cat ./coverage/**/lcov.info | coveralls"
