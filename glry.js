@@ -23,19 +23,19 @@
   }
 
   function cssTranslateX(element, positionX, speed) {
-    var options = {},
-      prefix = cssPrefix();
-    options[prefix + 'transform'] = 'translateX(' + positionX + ')';
-    options[prefix + 'transition'] = prefix + 'transform ' + speed + 's linear, opacity ' + speed + 's linear';
+    const options = {};
+    const prefix = cssPrefix();
+    options[`${prefix}transform`] = `translateX(${positionX})`;
+    options[`${prefix}transition`] = `${prefix}transform ${speed}s linear, opacity ${speed}s linear`;
     extend(element.style, options);
   }
 
   function cssCenter(element, width, height) {
     extend(element.style, {
-      'width': width + 'px',
-      'height': height + 'px',
-      'top': (window.innerHeight - height) / 2 + 'px',
-      'left': (window.innerWidth - width) / 2 + 'px'
+      width: `${width}px`,
+      height: `${height}px`,
+      top: `${(window.innerHeight - height) / 2}px`,
+      left: `${(window.innerWidth - width) / 2}px`,
     });
   }
 
@@ -61,7 +61,7 @@
   };
 
   GlryTap.prototype.end = function(e) {
-    var tap = new CustomEvent('tap', { bubbles: true, cancelable: true });
+    const tap = new CustomEvent('tap', { bubbles: true, cancelable: true });
     if (!this.moved) {
       e.stopPropagation();
       if (!e.target.dispatchEvent(tap)) {
@@ -82,26 +82,25 @@
   };
 
   function Glry(options) {
-    var settings = extend({
-          target: '#figure',
-          animationSpeed: 250,
-          enableKeyboard: true,
-          onLoadStart: false,
-          onLoadEnd: false,
-          load: function () {},
-          canNavigate: function () { return true },
-        },
-        options),
-
-      elmContainer = typeof settings.target === 'object' ? settings.target : document.querySelector(settings.target),
-      elmNavigation = elmContainer.querySelector('.navigation'),
-      elmLoading = elmContainer.querySelector('.loading'),
-      elmError = elmContainer.querySelector('.error'),
-      image = null,
-      imageWidth = 0,
-      imageHeight = 0,
-      swipeDiff = 0,
-      inProgress = false;
+    const settings = {
+      target: '#figure',
+      animationSpeed: 250,
+      enableKeyboard: true,
+      onLoadStart: false,
+      onLoadEnd: false,
+      load: () => {},
+      canNavigate: () => true,
+      ...options,
+    };
+    const elmContainer = typeof settings.target === 'object' ? settings.target : document.querySelector(settings.target);
+    const elmNavigation = elmContainer.querySelector('.navigation');
+    const elmLoading = elmContainer.querySelector('.loading');
+    const elmError = elmContainer.querySelector('.error');
+    let image = null;
+    let imageWidth = 0;
+    let imageHeight = 0;
+    let swipeDiff = 0;
+    let inProgress = false;
 
     window.addEventListener('resize', setImage);
     window.addEventListener('touchmove', preventScrolling);
@@ -109,7 +108,7 @@
     toggleVisible();
 
     if (elmNavigation) {
-      var glryTap = new GlryTap(window);
+      const glryTap = new GlryTap(window);
       window.addEventListener('tap', handleNavigationToggle);
       elmNavigation.querySelector('.prev').addEventListener('tap', handleNavigationClick.bind(this, 'left'));
       elmNavigation.querySelector('.next').addEventListener('tap', handleNavigationClick.bind(this, 'right'));
@@ -130,9 +129,9 @@
 
       window.scrollTo(0, 0);
 
-      var screenWidth = window.innerWidth,
-        screenHeight = window.innerHeight,
-        tmpImage = new Image();
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const tmpImage = new Image();
 
       tmpImage.src = image.src;
       tmpImage.onload = function () {
@@ -152,14 +151,14 @@
     function loadImage(direction) {
       if (inProgress) return false;
 
-      var src = settings.load(direction);
+      const src = settings.load(direction);
       if (!src) return false;
 
       direction = direction === 'left' ? 1 : direction === 'right' ? -1 : 0;
 
       if (image) {
         image.style.opacity = 0;
-        cssTranslateX(image, (100 * direction) - swipeDiff + 'px', settings.animationSpeed / 1000);
+        cssTranslateX(image, `${(100 * direction) - swipeDiff}px`, settings.animationSpeed / 1000);
         setTimeout(removeImage, settings.animationSpeed);
         swipeDiff = 0;
       }
@@ -176,10 +175,10 @@
           setImage();
 
           image.style.opacity = 0;
-          cssTranslateX(image, -100 * direction + 'px', 0);
-          setTimeout(function () {
+          cssTranslateX(image, `${-100 * direction}px`, 0);
+          setTimeout(() => {
             image.style.opacity = 1;
-            cssTranslateX(image, 0 + 'px', settings.animationSpeed / 1000);
+            cssTranslateX(image, '0px', settings.animationSpeed / 1000);
           }, 50);
 
           setTimeout(function () {
@@ -194,9 +193,9 @@
           if (settings.onLoadEnd !== false) settings.onLoadEnd();
         };
 
-        var swipeStart = 0,
-          swipeEnd = 0,
-          swipeDirection = 0;
+        let swipeStart = 0;
+        let swipeEnd = 0;
+        let swipeDirection = 0;
 
         image.addEventListener('touchstart', function (e) {
           e.preventDefault();
@@ -255,9 +254,7 @@
 
     loadImage();
 
-    return {
-      loadImage: loadImage
-    };
+    return { loadImage };
   }
 
   Glry.prototype.extend = extend;
