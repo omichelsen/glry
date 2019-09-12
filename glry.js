@@ -8,14 +8,6 @@
 }(this, function () {
   'use strict';
 
-  function extend(target, source) {
-    if (typeof source !== 'object') return target;
-    for (var prop in source) {
-      target[prop] = source[prop];
-    }
-    return target;
-  }
-
   function cssPrefix() {
     var s = (document.body || document.documentElement).style;
     if (s.WebkitTransform == '') return '-webkit-';
@@ -23,15 +15,13 @@
   }
 
   function cssTranslateX(element, positionX, speed) {
-    const options = {};
     const prefix = cssPrefix();
-    options[`${prefix}transform`] = `translateX(${positionX})`;
-    options[`${prefix}transition`] = `${prefix}transform ${speed}s linear, opacity ${speed}s linear`;
-    extend(element.style, options);
+    element.style[`${prefix}transform`] = `translateX(${positionX})`;
+    element.style[`${prefix}transition`] = `${prefix}transform ${speed}s linear, opacity ${speed}s linear`;
   }
 
   function cssCenter(element, width, height) {
-    extend(element.style, {
+    Object.assign(element.style, {
       width: `${width}px`,
       height: `${height}px`,
       top: `${(window.innerHeight - height) / 2}px`,
@@ -256,8 +246,6 @@
 
     return { loadImage };
   }
-
-  Glry.prototype.extend = extend;
 
   return Glry;
 
