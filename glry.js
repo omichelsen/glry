@@ -85,6 +85,7 @@
     let swipeDiff = 0;
     let inProgress = false;
 
+    window.addEventListener('orientationchange', setImage);
     window.addEventListener('resize', setImage);
     window.addEventListener('touchmove', preventScrolling);
 
