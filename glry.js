@@ -8,16 +8,9 @@
 }(this, function () {
   'use strict';
 
-  function cssPrefix() {
-    var s = (document.body || document.documentElement).style;
-    if (s.WebkitTransform == '') return '-webkit-';
-    return '';
-  }
-
   function cssTranslateX(element, positionX, speed) {
-    const prefix = cssPrefix();
-    element.style[`${prefix}transform`] = `translateX(${positionX})`;
-    element.style[`${prefix}transition`] = `${prefix}transform ${speed}s linear, opacity ${speed}s linear`;
+    element.style.transform = `translateX(${positionX})`;
+    element.style.transition = `transform ${speed}s linear, opacity ${speed}s linear`;
   }
 
   function cssCenter(element, width, height) {

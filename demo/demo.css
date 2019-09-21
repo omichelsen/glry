@@ -12,9 +12,7 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 nav {
   position: absolute;
@@ -23,8 +21,7 @@ nav {
   background: rgba(0, 0, 0, 0.3);
   opacity: 0;
   text-align: center;
-  -webkit-transition: opacity 0.25s ease-in-out;
-          transition: opacity 0.25s ease-in-out;
+  transition: opacity 0.25s ease-in-out;
   z-index: 100;
 }
 nav button {
@@ -39,8 +36,7 @@ nav button {
   font-size: 1em;
   line-height: 3em;
   text-decoration: none;
-  -webkit-transition: background 300ms;
-          transition: background 300ms;
+  transition: background 300ms;
 }
 nav button:hover {
   background: rgba(255, 255, 255, 0.3);
@@ -64,18 +60,14 @@ figure img {
   position: fixed;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 .loading,
 .error {
   position: fixed;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   color: #555;
   font-size: 2em;
   font-weight: bold;
