@@ -65,7 +65,7 @@
   };
 
   function Glry(options) {
-    const settings = {
+    const settings = Object.assign({
       target: '#figure',
       animationSpeed: 250,
       enableKeyboard: true,
@@ -73,8 +73,7 @@
       onLoadEnd: false,
       load: () => {},
       canNavigate: () => true,
-      ...options,
-    };
+    }, options);
     const elmContainer = typeof settings.target === 'object' ? settings.target : document.querySelector(settings.target);
     const elmNavigation = elmContainer.querySelector('.navigation');
     const elmLoading = elmContainer.querySelector('.loading');
