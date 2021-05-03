@@ -3,7 +3,6 @@
 	"version": "2.1.0",
 	"description": "Image gallery with mobile/touch support and no dependencies.",
 	"main": "glry.js",
-	"dependencies": {},
 	"devDependencies": {
 		"jasmine-core": "^3.6.0",
 		"karma": "^5.1.1",
