@@ -1,4 +1,4 @@
-import DailyGlry from '../src/index';
+import DailyGlry from '../src/index.js';
 
 const dailyGlry = new DailyGlry({
 	dateMin: new Date(1989, 4, 16),
