@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=740, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link href="demo.css" rel="stylesheet" />
+	<title>glry demo</title>
+</head>
+<body>
+
+	<figure id="figure">
+		<div class="loading">LOADING</div>
+		<div class="error">ERROR</div>
+
+		<nav class="navigation">
+			<button class="prev">◀</button>
+			<button class="next">▶</button>
+		</nav>
+	</figure>
+
+	<script type="module">
+		import Glry from '../src/index.js';
+
+		const index = -1;
+
+		const images = [
+			'http://imgs.xkcd.com/comics/timeghost.png',
+			'http://imgs.xkcd.com/comics/lease.png',
+			'http://imgs.xkcd.com/comics/exploits_of_a_mom.png'
+		];
+
+		const glry = new Glry({
+			load: (direction) => {
+				index = (index + (direction === 'left' ? -1 : 1)) % images.length;
+				if (index < 0) index = images.length - 1;
+				return images[index];
+			}
+		});
+	</script>
+</body>
+</html>

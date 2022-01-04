@@ -1,0 +1,20 @@
+{
+	"name": "@glry/core",
+	"version": "3.0.0",
+	"description": "Image gallery with mobile/touch support and no dependencies.",
+	"type": "module",
+	"main": "src/index.js",
+	"files": [
+		"src/index.js"
+	],
+	"scripts": {
+		"test": "karma start"
+	},
+	"devDependencies": {
+		"jasmine-core": "^3.6.0",
+		"karma": "^5.1.1",
+		"karma-coverage": "^2.0.3",
+		"karma-firefox-launcher": "^1.3.0",
+		"karma-jasmine": "^3.3.1"
+	}
+}

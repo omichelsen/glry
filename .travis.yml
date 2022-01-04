@@ -1,8 +1,0 @@
-language: node_js
-node_js:
-  - node
-addons:
-  firefox: latest
-services:
-  - xvfb
-after_script: "npx coveralls && cat ./coverage/**/lcov.info | coveralls"

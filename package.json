@@ -1,34 +1,8 @@
 {
-	"name": "glry",
-	"version": "2.1.0",
-	"description": "Image gallery with mobile/touch support and no dependencies.",
-	"main": "glry.js",
-	"devDependencies": {
-		"jasmine-core": "^3.6.0",
-		"karma": "^5.1.1",
-		"karma-coverage": "^2.0.3",
-		"karma-firefox-launcher": "^1.3.0",
-		"karma-jasmine": "^3.3.1"
-	},
-	"scripts": {
-		"test": "karma start"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/omichelsen/glry.git"
-	},
-	"keywords": [
-		"gallery",
-		"image",
-		"photo",
-		"mobile",
-		"touch",
-		"javascript"
-	],
-	"author": "Ole Michelsen <ole@michelsen.dk>",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/omichelsen/glry/issues"
-	},
-	"homepage": "https://github.com/omichelsen/glry"
+  "name": "glry",
+  "packageManager": "yarn@3.1.1",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
 }

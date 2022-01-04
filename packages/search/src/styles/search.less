@@ -1,0 +1,153 @@
+@import (less) "taggle.css";
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	box-sizing: border-box;
+}
+
+body {
+	background: #fff;
+}
+
+.search {
+	padding: 10px;
+	background: #f7f7f7;
+	text-align: center;
+
+	.search-input {
+		min-width: 50%;
+		border: 1px solid #ccc;
+		font-family: 'Helvetica Neue';
+		font-size: 20pt;
+		font-weight: 100;
+		line-height: 150%;
+		text-align: center;
+	}
+}
+
+.results-count {
+	color: #f4f4f4;
+	font-family: 'Helvetica Neue';
+	font-size: 200pt;
+	font-weight: 100;
+	line-height: 120%;
+	text-align: center;
+
+	@media screen and (max-device-width: 640px) {
+		font-size: 100pt;
+	}
+}
+
+.results {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+
+	.result {
+		display: inline-block;
+		position: relative;
+		margin: 10px;
+		padding: 20px;
+		border: 1px solid transparent;
+
+		&:hover {
+			border-color: #ccc;
+			cursor: pointer;
+		}
+
+		&.selected {
+			padding-bottom: 10px;
+			background: #f4f4f4;
+			border: 1px solid #c4c4c4;
+		}
+
+		.image {
+			max-width: 100%;
+		}
+
+		.tags {
+			position: relative;
+		}
+
+		.permalink {
+			display: none;
+		}
+
+		&.selected {
+			.permalink {
+				display: block;
+				position: absolute;
+				right: 20px;
+				margin-top: 2px;
+			}
+		}
+	}
+}
+
+/* tag cloud
+------------------------
+*/
+.tagcloud {
+	margin: 30px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	list-style-type: none;
+
+	.tag {
+		margin: 5px;
+		color: #ccc;
+		font-family: 'Helvetica Neue';
+		font-size: 8pt;
+		font-weight: 200;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+
+		a {
+			color: #ccc;
+			text-decoration: none;
+		}
+	}
+}
+
+
+/* taggle
+------------------------
+*/
+.tags {
+	margin-top: 5px;
+
+	.taggle_placeholder {
+		top: 7px;
+		left: 0;
+		font-family: 'Helvetica Neue';
+		font-size: 10pt;
+		font-weight: 200;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+	}
+
+	.taggle_list {
+		.taggle .taggle_text,
+		.taggle_input {
+			font-family: 'Helvetica Neue';
+			font-size: 8pt;
+			font-weight: 200;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
+
+		.taggle_input {
+			margin-top: -3px;
+			font-size: 10pt;
+		}
+
+		.taggle {
+			.close {
+				top: 3px;
+			}
+		}
+	}
+}

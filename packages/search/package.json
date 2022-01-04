@@ -1,0 +1,38 @@
+{
+	"name": "@glry/search",
+	"version": "3.0.0",
+	"description": "Frontend for glry-search.",
+	"main": "dist/search.js",
+	"scripts": {
+		"build": "parcel build src/index.html dist/ --public-url .",
+		"start": "parcel src/index.html -p 8080"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/omichelsen/glry-search.git"
+	},
+	"author": "Ole Michelsen",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/omichelsen/glry-search/issues"
+	},
+	"homepage": "https://github.com/omichelsen/glry-search#readme",
+	"dependencies": {
+		"blazy": "^1.8.2",
+		"lit-html": "^1.4.1",
+		"lodash": "^4.17.21",
+		"taggle": "^1.15.0"
+	},
+	"devDependencies": {
+		"@parcel/optimizer-data-url": "^2.0.1",
+		"@parcel/packager-raw-url": "^2.0.0",
+		"@parcel/transformer-inline-string": "^2.0.1",
+		"@parcel/transformer-sass": "^2.0.1",
+		"@parcel/transformer-webmanifest": "^2.0.0",
+		"parcel": "^2.0.1",
+		"sass": "^1.45.2"
+	},
+	"browserslist": [
+		"last 1 Chrome version"
+	]
+}

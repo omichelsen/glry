@@ -1,0 +1,20 @@
+{
+	"name": "@glry/daily",
+	"version": "3.0.0",
+	"description": "Daily comic strip gallery with mobile/touch support.",
+	"type": "module",
+	"main": "src/index.js",
+	"files": [
+		"src/index.js"
+	],
+	"scripts": {
+		"start": "parcel demo/index.html"
+	},
+	"dependencies": {
+		"@glry/core": "^3.0.0",
+		"date-fns": "^2.22.1"
+	},
+	"devDependencies": {
+		"parcel": "^2.0.1"
+	}
+}
