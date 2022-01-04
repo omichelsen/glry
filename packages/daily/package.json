@@ -1,6 +1,6 @@
 {
   "name": "@glry/daily",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Daily comic strip gallery with mobile/touch support.",
   "type": "module",
   "main": "src/index.js",
