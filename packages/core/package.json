@@ -8,6 +8,7 @@
 		"src/index.js"
 	],
 	"scripts": {
+		"start": "php -S localhost:1234",
 		"test": "karma start"
 	},
 	"devDependencies": {
