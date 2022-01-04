@@ -34,10 +34,7 @@ export default function DailyGlry(params) {
 		.addEventListener('tap', handleNavigationClick.bind(this, 'today'));
 	elm.querySelector('.share').addEventListener('tap', function (e) {
 		if (navigator.share) {
-			return navigator.share({
-				text: document.title,
-				url: window.location.href,
-			});
+			return navigator.share({ url: window.location.href });
 		}
 
 		const date = format(getStripDate(), options.hashFormat);
