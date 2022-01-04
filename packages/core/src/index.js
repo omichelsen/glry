@@ -69,7 +69,7 @@ GlryTap.prototype.handleEvent = function (e) {
 	}
 };
 
-export default function Glry(options) {
+module.exports = function Glry(options) {
 	const settings = {
 		target: '#figure',
 		animationSpeed: 250,
@@ -257,4 +257,4 @@ export default function Glry(options) {
 	loadImage();
 
 	return { loadImage };
-}
+};
